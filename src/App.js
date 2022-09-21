@@ -7,6 +7,8 @@ function App() {
     leftPane: '',
     selectedOperator: '+',
     rightPane: '',
+    leftStored: 0,
+    rightStored: 0,
     calculatedResult: 0
   }
 
@@ -17,6 +19,8 @@ function App() {
       leftPane: state.leftPane,
       selectedOperator: state.selectedOperator,
       rightPane: state.rightPane,
+      leftStored: state.leftStored,
+      rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
     }
 
@@ -32,6 +36,8 @@ function App() {
       leftPane: state.leftPane,
       selectedOperator: state.selectedOperator,
       rightPane: state.rightPane,
+      leftStored: state.leftStored,
+      rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
     }
     newState.selectedOperator = event.target.value
@@ -44,6 +50,8 @@ function App() {
       leftPane: state.leftPane,
       selectedOperator: state.selectedOperator,
       rightPane: state.rightPane,
+      leftStored: state.leftStored,
+      rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
     }
     newState[event.target.className] = ''
@@ -55,6 +63,8 @@ function App() {
       leftPane: state.leftPane,
       selectedOperator: state.selectedOperator,
       rightPane: state.rightPane,
+      leftStored: state.leftStored,
+      rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
     }
 
@@ -77,6 +87,32 @@ function App() {
     setState(newState)
   }
 
+  const storeClick = (event) => {
+    const newState = {
+      leftPane: state.leftPane,
+      selectedOperator: state.selectedOperator,
+      rightPane: state.rightPane,
+      leftStored: state.leftStored,
+      rightStored: state.rightStored,
+      calculatedResult: state.calculatedResult
+    }
+    newState[event.target.className] = event.target.value
+    setState(newState)
+  }
+
+  const recallClick = (event) => {
+    const newState = {
+      leftPane: state.leftPane,
+      selectedOperator: state.selectedOperator,
+      rightPane: state.rightPane,
+      leftStored: state.leftStored,
+      rightStored: state.rightStored,
+      calculatedResult: state.calculatedResult
+    }
+    newState[event.target.className] = event.target.value
+    setState(newState)
+  }
+
   return (
     <div className="calculator">
       <div className="panel">
@@ -92,6 +128,8 @@ function App() {
           <button value="8" className="leftPane" onClick={numberClick}>8</button>
           <button value="9" className="leftPane" onClick={numberClick}>9</button>
           <button value="0" className="leftPane" onClick={numberClick}>0</button>
+          <button value={ state.leftPane ? state.leftPane : 0 } className="leftStored" onClick={storeClick}>Store</button>
+          <button value={ state.leftStored} className="leftPane" onClick={recallClick}>Recall</button>
           <button className="leftPane" onClick={clearValue}>Clear</button>
         </div>
       </div>
@@ -119,6 +157,8 @@ function App() {
           <button value="8" className="rightPane" onClick={numberClick}>8</button>
           <button value="9" className="rightPane" onClick={numberClick}>9</button>
           <button value="0" className="rightPane" onClick={numberClick}>0</button>
+          <button value={ state.rightPane ? state.rightPane : 0 } className="rightStored" onClick={storeClick}>Store</button>
+          <button value={ state.rightStored} className="rightPane" onClick={recallClick}>Recall</button>
           <button className="rightPane" onClick={clearValue}>Clear</button>
         </div>
       </div>
