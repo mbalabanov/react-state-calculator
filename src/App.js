@@ -7,8 +7,8 @@ function App() {
     leftPane: '',
     selectedOperator: '+',
     rightPane: '',
-    leftStored: 0,
-    rightStored: 0,
+    leftStored: '',
+    rightStored: '',
     calculatedResult: 0
   }
 
@@ -27,6 +27,13 @@ function App() {
     newState[event.target.className] += event.target.value
 
     if (newState[event.target.className] !== '0') {
+      if (event.target.value === '.' && state[event.target.className].indexOf(".") !== -1) {
+        newState[event.target.className] = state[event.target.className]
+      }
+      if( newState[event.target.className] === '0.' || newState[event.target.className] === '.') {
+        console.log(state[event.target.className].indexOf("."))
+        newState[event.target.className] = '0.'
+      }
       setState(newState)
     }
   }
@@ -59,10 +66,22 @@ function App() {
   }
 
   const calculateResult = () => {
+
+    let newLeftPane = state.leftPane
+    let newRightPane = state.rightPane
+
+    if (newLeftPane[newLeftPane.length - 1] === '.') {
+      newLeftPane.slice(0, -1)
+    }
+
+    if (newRightPane[newRightPane.length - 1] === '.') {
+      newRightPane(0, -1)
+    }
+
     const newState = {
-      leftPane: state.leftPane,
+      leftPane: Number(newLeftPane),
       selectedOperator: state.selectedOperator,
-      rightPane: state.rightPane,
+      rightPane: Number(newRightPane),
       leftStored: state.leftStored,
       rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
@@ -80,7 +99,7 @@ function App() {
       newState.calculatedResult = state.leftPane * state.rightPane
     }
 
-    if (state.selectedOperator === '/') {
+    if (state.selectedOperator === '÷') {
       newState.calculatedResult = state.leftPane / state.rightPane
     }
 
@@ -113,10 +132,14 @@ function App() {
     setState(newState)
   }
 
+  const clearAll = () => {
+    setState(initialState)
+  }
+
   return (
     <div className="calculator">
       <div className="panel">
-        <p className="numberField">{state.leftPane ? state.leftPane : 0}</p>
+        <p className="numberField">{state.leftPane ? state.leftPane : '0'}</p>
         <div className="numbers">
           <button value="1" className="leftPane" onClick={numberClick}>1</button>
           <button value="2" className="leftPane" onClick={numberClick}>2</button>
@@ -128,7 +151,8 @@ function App() {
           <button value="8" className="leftPane" onClick={numberClick}>8</button>
           <button value="9" className="leftPane" onClick={numberClick}>9</button>
           <button value="0" className="leftPane" onClick={numberClick}>0</button>
-          <button value={ state.leftPane ? state.leftPane : 0 } className="leftStored" onClick={storeClick}>Store</button>
+          <button value="." className="leftPane" onClick={numberClick}>.</button><br/>
+          <button value={ state.leftPane ? state.leftPane : '0' } className="leftStored" onClick={storeClick}>Store</button>
           <button value={ state.leftStored} className="leftPane" onClick={recallClick}>Recall</button>
           <button className="leftPane" onClick={clearValue}>Clear</button>
         </div>
@@ -145,7 +169,7 @@ function App() {
       </div>
 
       <div className="panel">
-        <p className="numberField">{state.rightPane ? state.rightPane : 0}</p>
+        <p className="numberField">{state.rightPane ? state.rightPane : '0'}</p>
         <div className="numbers">
           <button value="1" className="rightPane" onClick={numberClick}>1</button>
           <button value="2" className="rightPane" onClick={numberClick}>2</button>
@@ -157,7 +181,8 @@ function App() {
           <button value="8" className="rightPane" onClick={numberClick}>8</button>
           <button value="9" className="rightPane" onClick={numberClick}>9</button>
           <button value="0" className="rightPane" onClick={numberClick}>0</button>
-          <button value={ state.rightPane ? state.rightPane : 0 } className="rightStored" onClick={storeClick}>Store</button>
+          <button value="." className="rightPane" onClick={numberClick}>.</button><br/>
+          <button value={ state.rightPane ? state.rightPane : '0' } className="rightStored" onClick={storeClick}>Store</button>
           <button value={ state.rightStored} className="rightPane" onClick={recallClick}>Recall</button>
           <button className="rightPane" onClick={clearValue}>Clear</button>
         </div>
@@ -165,7 +190,8 @@ function App() {
       <div className="panel answer">
         <p className="numberField">{state.calculatedResult}</p>
         <div>
-          <button onClick={calculateResult}>=</button>
+          <button onClick={calculateResult}>=</button><br/><br/>
+          <button onClick={clearAll}>Clear All</button>
         </div>
       </div>
     </div>
