@@ -45,3 +45,12 @@ html {
   width: 100%;
   height: 40px;
 }
+
+.numberField {
+  text-align: right;
+}
+
+.operatorField {
+  text-align: center;
+  color: tomato;
+}
