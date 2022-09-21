@@ -94,7 +94,7 @@ function App() {
       newState.calculatedResult = Number(newState.leftPane) - Number(newState.rightPane)
     }
 
-    if (state.selectedOperator === '*') {
+    if (state.selectedOperator === '×') {
       newState.calculatedResult = Number(newState.leftPane) * Number(newState.rightPane)
     }
 
@@ -162,7 +162,7 @@ function App() {
         <div className="numbers">
           <button value="+" className="selectedOperator" onClick={operatorClick}>+</button>
           <button value="-" className="selectedOperator" onClick={operatorClick}>-</button>
-          <button value="*" className="selectedOperator" onClick={operatorClick}>*</button>
+          <button value="×" className="selectedOperator" onClick={operatorClick}>×</button>
           <button value="÷" className="selectedOperator" onClick={operatorClick}>÷</button>
         </div>
       </div>
