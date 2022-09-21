@@ -31,7 +31,6 @@ function App() {
         newState[event.target.className] = state[event.target.className]
       }
       if( newState[event.target.className] === '0.' || newState[event.target.className] === '.') {
-        console.log(state[event.target.className].indexOf("."))
         newState[event.target.className] = '0.'
       }
       setState(newState)
@@ -79,28 +78,28 @@ function App() {
     }
 
     const newState = {
-      leftPane: parseInt(newLeftPane),
+      leftPane: newLeftPane,
       selectedOperator: state.selectedOperator,
-      rightPane: parseInt(newRightPane),
+      rightPane: newRightPane,
       leftStored: state.leftStored,
       rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
     }
 
     if (state.selectedOperator === '+') {
-      newState.calculatedResult = newState.leftPane + newState.rightPane
+      newState.calculatedResult = Number(newState.leftPane) + Number(newState.rightPane)
     }
 
     if (state.selectedOperator === '-') {
-      newState.calculatedResult = newState.leftPane - newState.rightPane
+      newState.calculatedResult = Number(newState.leftPane) - Number(newState.rightPane)
     }
 
     if (state.selectedOperator === '*') {
-      newState.calculatedResult = newState.leftPane * newState.rightPane
+      newState.calculatedResult = Number(newState.leftPane) * Number(newState.rightPane)
     }
 
     if (state.selectedOperator === '÷') {
-      newState.calculatedResult = newState.leftPane / newState.rightPane
+      newState.calculatedResult = Number(newState.leftPane) / Number(newState.rightPane)
     }
 
     setState(newState)
