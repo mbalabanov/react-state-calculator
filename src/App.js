@@ -79,28 +79,28 @@ function App() {
     }
 
     const newState = {
-      leftPane: Number(newLeftPane),
+      leftPane: parseInt(newLeftPane),
       selectedOperator: state.selectedOperator,
-      rightPane: Number(newRightPane),
+      rightPane: parseInt(newRightPane),
       leftStored: state.leftStored,
       rightStored: state.rightStored,
       calculatedResult: state.calculatedResult
     }
 
     if (state.selectedOperator === '+') {
-      newState.calculatedResult = state.leftPane + state.rightPane
+      newState.calculatedResult = newState.leftPane + newState.rightPane
     }
 
     if (state.selectedOperator === '-') {
-      newState.calculatedResult = state.leftPane - state.rightPane
+      newState.calculatedResult = newState.leftPane - newState.rightPane
     }
 
     if (state.selectedOperator === '*') {
-      newState.calculatedResult = state.leftPane * state.rightPane
+      newState.calculatedResult = newState.leftPane * newState.rightPane
     }
 
     if (state.selectedOperator === '÷') {
-      newState.calculatedResult = state.leftPane / state.rightPane
+      newState.calculatedResult = newState.leftPane / newState.rightPane
     }
 
     setState(newState)
